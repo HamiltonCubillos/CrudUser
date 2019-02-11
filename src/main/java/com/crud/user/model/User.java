@@ -18,7 +18,7 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(Integer id, String name, Date birthdate) {
+	public User(final Integer id, final String name, final Date birthdate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -27,19 +27,19 @@ public class User {
 	public Integer getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 	public Date getBirthdate() {
 		return birthdate;
 	}
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(final Date birthdate) {
 		this.birthdate = birthdate;
 	}
 }
