@@ -14,6 +14,11 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     
+    /**
+     * Method that returns all existing users in database.
+     * If there are no users return null.
+     * @return all existing users in database or null if there are no users
+     */
     @GetMapping("/users")
     public List<User> retrieveAllStudents() {
         return userRepository.findAll();
