@@ -1,11 +1,15 @@
 package com.crud.user;
 
-import static com.crud.user.Constants.ALICEID;
-import static com.crud.user.Constants.ALICENAME;
-import static com.crud.user.Constants.INCORRECTID;
-import static com.crud.user.Constants.INITIALSIZEOFUSERS;
-import static com.crud.user.Constants.USERNOTEXIST;
-import static com.crud.user.Constants.ZERO;
+import static com.crud.user.utils.Constants.ALICEID;
+import static com.crud.user.utils.Constants.ALICENAME;
+import static com.crud.user.utils.Constants.EVILID;
+import static com.crud.user.utils.Constants.INCORRECTID;
+import static com.crud.user.utils.Constants.INITIALSIZEOFUSERS;
+import static com.crud.user.utils.Constants.NAMETOADD;
+import static com.crud.user.utils.Constants.TOMBIRTHDAY;
+import static com.crud.user.utils.Constants.TOMNAME;
+import static com.crud.user.utils.Constants.USERNOTEXIST;
+import static com.crud.user.utils.Constants.ZERO;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -46,5 +50,29 @@ public class UserApplicationTests {
         final Optional<User> user = userRepository.findById(ALICEID);
         assertTrue(user.isPresent());
     }
+	
+    @Test
+    public void createUser() {
+        assertTrue(!userRepository.findById(EVILID).isPresent());
+        final User user = userRepository.save(new User(EVILID,TOMNAME, TOMBIRTHDAY));
+        assertTrue(user != null);
+    }
+    
+	@Test
+    public void updateUser() {
+	    final User user = userRepository.findById(ALICEID).get();
+	    assertTrue(user != null);
+        user.setName(NAMETOADD);
+	    final User userFinal = userRepository.save(user);
+	    assertTrue(NAMETOADD.equals(userFinal.getName()));
+    }
+    
+    @Test
+    public void deleteUser() {
+        final User user = userRepository.findById(ALICEID).get();
+        userRepository.deleteById(user.getId());
+        assertTrue(!userRepository.findById(ALICEID).isPresent());
+    }
+	
 }
 
